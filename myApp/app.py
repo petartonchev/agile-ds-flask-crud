@@ -97,10 +97,15 @@ def product_edit(product_id):
         # Abort with Not Found.
         abort(404)
 
-    form = ProductForm(request.form)
+    form = ProductForm(request.form, obj=product)
     if request.method == 'POST' and form.validate():
         mongo.db.products.update_one({'_id': ObjectId(product_id)}, {"$set": form.data})
         return redirect(url_for('product_detail', product_id=product_id))
+
+    form.name.default = product['name']
+    form.description.default = product['description']
+    form.price.default = product['price']
+    form.process()
 
     return render_template('product/edit.html', form=form)
 
