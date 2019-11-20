@@ -16,7 +16,7 @@ from os import environ
 app = Flask(__name__)
 
 app.config['MONGO_DBNAME'] = environ.get('MONGO_DBNAME')
-app.config['MONGO_URI'] = environ.get('MONGO_DBNAME')
+app.config['MONGO_URI'] = environ.get('MONGO_URI')
 app.config['SECRET_KEY'] = environ.get('SECRET_KEY')
 app.config['SESSION_PROTECTION'] = 'strong'
 
